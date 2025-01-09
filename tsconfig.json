@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    // ...
+    "baseUrl": ".", 
+    "types": ["element-plus/global"],
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true, 
+    "moduleResolution": "node" 
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ]
+}

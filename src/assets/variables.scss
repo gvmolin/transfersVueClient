@@ -1,0 +1,11 @@
+$color1: #fdffe2;
+$color2: #83b4ff;
+$color3: #5a72a0;
+$color4: #1a2130;
+
+$defaultPaddingHor: 1vw;
+$defaultPaddingVer: 2vh;
+$defaultPadding: $defaultPaddingVer $defaultPaddingHor;
+
+$menuWidth: 15vw;
+$hiddenMenu: calc(-1 * ($menuWidth - 2vw));
