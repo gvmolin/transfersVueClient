@@ -47,10 +47,16 @@ Essas tecnologias foram escolhidas para garantir uma aplicação eficiente, esca
 1. Clone o repositório:
 
    ```bash
+   git clone https://github.com/gabrielmolin-urbano/transfersSpringBootAPI
+   ```
+
+2. Abra o diretório:
+
+   ```bash
    cd transfersVueClient
    ```
 
-2. Instale as dependências e execute a aplicação:
+3. Instale as dependências e execute a aplicação:
 
    ```bash
    yarn install
