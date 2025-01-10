@@ -56,7 +56,10 @@ Essas tecnologias foram escolhidas para garantir uma aplicação eficiente, esca
    cd transfersVueClient
    ```
 
-3. Instale as dependências e execute a aplicação:
+3. Abra o diretório:
+   Clone o '.env.example' como '.env' e mude as variáveis se necessário
+
+4. Instale as dependências e execute a aplicação:
 
    ```bash
    yarn install
