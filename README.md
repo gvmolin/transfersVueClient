@@ -1,34 +1,53 @@
-# Projeto de Consulta de Endereços por CEP
-
-Este projeto é uma aplicação frontend que consome uma API externa para realizar consultas de endereços por CEP. A proposta de utilizar uma API externa é interessante porque a aplicação não contém regras de negócio complexas, focando apenas na exibição dos dados retornados.
-
 ## Tecnologias Utilizadas
 
 - **Vue 3**
 - **TypeScript**
 - **Element Plus**
 - **Pinia**
+- **Axios**
+- **Vite**
+- **FontAwesome**
+- **Sass**
+- **Vue Router**
+- **Yarn** e **NPM**
 
 ## Razões para as Escolhas Tecnológicas
 
 ### Vue 3 com TypeScript
-
-Optamos por utilizar Vue 3 juntamente com TypeScript para aproveitar a tipagem estática que o TypeScript oferece, o que melhora a robustez do código e facilita a detecção de erros durante o desenvolvimento. Além disso, a abordagem do "script setup" na Composition API do Vue 3 se mostrou mais interessante para este projeto, pois permite um código mais limpo e conciso.
+Optamos por utilizar Vue 3 juntamente com TypeScript para aproveitar a tipagem estática que o TypeScript oferece, melhorando a robustez do código e facilitando a detecção de erros durante o desenvolvimento. A abordagem do "script setup" na Composition API do Vue 3 proporciona um código mais limpo e conciso, alinhado com as melhores práticas do ecossistema Vue.
 
 ### Element Plus
-
-O Element Plus foi escolhido como biblioteca de componentes UI devido à sua vasta gama de componentes prontos para uso, documentação abrangente e excelente integração com Vue 3.
+O Element Plus foi escolhido como biblioteca de componentes UI devido à sua vasta gama de componentes prontos para uso, documentação abrangente e excelente integração com Vue 3. Ele oferece uma solução moderna e bem documentada para criar interfaces de usuário intuitivas e responsivas.
 
 ### Pinia
+Optamos por utilizar Pinia em vez do Vuex 3 como gerenciamento de estado, pois o Pinia é a solução oficial para Vue 3. Ele oferece uma API mais simples e intuitiva, sendo totalmente compatível com TypeScript, o que facilita o desenvolvimento e manutenção do projeto.
 
-Preferimos utilizar o Pinia em vez do Vuex 3, pois ele é a solução de estado oficial para Vue 3. O Pinia oferece uma API mais simples e intuitiva, além de ser totalmente compatível com TypeScript, o que se alinha perfeitamente com os objetivos do nosso projeto.
+### Axios
+**Axios** foi escolhido para realizar requisições HTTP devido à sua simplicidade e robustez. A biblioteca permite a manipulação eficiente de requisições assíncronas e é totalmente compatível com TypeScript, garantindo tipagem estática nas respostas e simplificando o processo de integração com APIs externas.
+
+### Vite
+Escolhemos **Vite** como bundler e servidor de desenvolvimento devido à sua velocidade e desempenho superior em comparação com outras ferramentas, como o Webpack. O Vite utiliza ESBuild para construção e oferece suporte nativo a Vue 3 e TypeScript, proporcionando uma experiência de desenvolvimento mais rápida e produtiva.
+
+### FontAwesome
+A biblioteca **FontAwesome** foi utilizada para incluir ícones na interface do usuário. Com uma grande variedade de ícones prontos para uso, a FontAwesome facilita a criação de uma interface visualmente atraente e intuitiva, contribuindo para uma melhor experiência do usuário.
+
+### Sass
+A escolha do **Sass** como pré-processador CSS visa otimizar o desenvolvimento de estilos, permitindo o uso de variáveis, mixins e aninhamento de seletores. Isso torna o código CSS mais modular, reutilizável e fácil de manter, principalmente em projetos de maior escala.
+
+### Vue Router
+**Vue Router** foi implementado para gerenciar a navegação entre as páginas do sistema. Ele oferece uma API poderosa e simples de usar, com suporte a navegação dinâmica, lazy loading de componentes e parâmetros de URL, o que facilita a criação de uma experiência de navegação fluida.
+
+### Yarn e NPM
+O projeto utiliza **Yarn** para gerenciamento de dependências, devido à sua performance superior em comparação com o NPM em termos de instalação de pacotes e resolução de dependências. Embora o **NPM** também seja compatível com o projeto, o Yarn é o gerenciador de pacotes preferido para este fluxo de trabalho. 
+
+Essas tecnologias foram escolhidas para garantir uma aplicação eficiente, escalável e fácil de manter, ao mesmo tempo em que proporcionam uma excelente experiência tanto para desenvolvedores quanto para usuários finais.
 
 ## Como Executar o Projeto
 
 1. Clone o repositório:
 
    ```bash
-   cd projeto-cep
+   cd transfersVueClient
    ```
 
 2. Instale as dependências e execute a aplicação:
