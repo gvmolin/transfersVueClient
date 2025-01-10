@@ -7,8 +7,8 @@
             <div>
                 <LogoComponent></LogoComponent>
                 <nav>
-                    <RouterLink to="/cadastro/usuarios">Cadastro de usuários</RouterLink>
-                    <RouterLink to="/cadastro/transferencias">Cadastro de transferências</RouterLink>
+                    <RouterLink to="/cadastro/usuarios">Usuários</RouterLink>
+                    <RouterLink to="/cadastro/transferencias">Transferências</RouterLink>
 
                     <el-button @click="menuStore.swapActive" type="primary" class="swap-button" style="color: black;">
                         <span>

@@ -1,8 +1,8 @@
 <template>
     <div class="logo-container">
         <div>
-            <h1>TransferBank</h1>
-            <h1>Challenge</h1>
+            <h1>Transfers</h1>
+            <h1>Backoffice</h1>
         </div>
 
     </div>
