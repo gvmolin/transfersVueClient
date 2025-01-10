@@ -15,6 +15,7 @@ import { RouterView, useRouter } from 'vue-router'
 import HeaderComponent from './components/Header/HeaderComponent.vue';
 import { useMenuStore } from './stores/menu';
 import { onMounted, ref } from 'vue';
+import routes from './router/routes';
 
 const menuStore = useMenuStore();
 const screenWidth = ref<number>(window.innerWidth);
@@ -22,8 +23,7 @@ const router = useRouter();
 
 onMounted(() => {
     const currentRoute = router.currentRoute;
-    if(currentRoute.value.path !== "/cadastro/usuarios" && currentRoute.value.path !== "/cadastro/transferencias") router.push("/cadastro/usuarios")
-    console.log(currentRoute.value);
+    if(!routes.find(el => el.path === currentRoute.value.path)) router.push("/cadastro/usuarios");
 })
 
 </script>
