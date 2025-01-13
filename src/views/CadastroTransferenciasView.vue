@@ -72,9 +72,10 @@
 import TransferFormComponent from '@/components/Forms/TransferFormComponent.vue';
 import { useAxios } from '@/composables/useAxios';
 import { formatarData } from '@/utils/date/dateUtils';
+import type { ICheckFeeDTO } from '@/utils/dto/checkFeeDTO';
 import type { ITransferDTO } from '@/utils/dto/transferDTO';
 import type { ITransferModel } from '@/utils/models/transferModel';
-import { ElNotification } from 'element-plus';
+import { ElMessage, ElMessageBox, ElNotification } from 'element-plus';
 import { onMounted, ref, watch } from 'vue';
 
 const INITIAL_TRANSFER_FORM:ITransferModel = {
@@ -88,7 +89,7 @@ const INITIAL_TRANSFER_FORM:ITransferModel = {
   status: ""
 }
 
-const { get, remove, post, put } = useAxios();
+const { get, remove, post } = useAxios();
 
 const transferList = ref<ITransferModel[]>();
 const showForm = ref<boolean>(false);
@@ -99,7 +100,8 @@ onMounted(async()=>{
 })
 
 watch(()=> transferForm.value, ()=>{
-  console.log(transferForm.value)
+
+
 })
 
 function onClickAdicionar(){
@@ -116,16 +118,62 @@ async function getTransfers(){
 }
 
 async function onSubmit() {
-  // if(validateTransfer()){
-    await createTransfer();
-    await getTransfers();
-    showForm.value = false;
-    transferForm.value = {...INITIAL_TRANSFER_FORM};
-  // }
+  try {
+    const dto = buildCreateDto();
+    const checkFeeData = await checkFee(dto);
+
+    ElMessageBox.confirm(createConfirmString(checkFeeData), 'Confirmação de valores', {
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      dangerouslyUseHTMLString: true,
+    })
+      .then(async () => {
+        const isValid = validateTransfer(dto, checkFeeData);
+        if (isValid) {
+          await createTransfer(dto);
+          await getTransfers();
+          showForm.value = false;
+          transferForm.value = { ...INITIAL_TRANSFER_FORM };
+        }
+      })
+      .catch((error: any) => {
+        throw new Error("Operação cancelada");
+      })
+
+
+  } catch (error: any) {
+    console.error(error);
+    ElNotification({
+      message: error.message || "Erro ao submeter dados",
+      type: "error",
+      duration: 1000
+    })
+    return;
+  }
 }
 
-async function createTransfer(){
-  await post(`/transfers/create`, buildCreateDto())
+async function checkFee(dto: ITransferDTO): Promise<ICheckFeeDTO> {
+  try {
+    const obj = await post(`/transfers/check-fee`, dto);
+
+    return obj;
+  } catch (error: any) {
+    console.error(error);
+    throw new Error(error);
+  }
+}
+
+function createConfirmString(checkFeeObj:ICheckFeeDTO): string{
+  return `
+    <p>Saldo da conta de origem: ${transferForm.value.accountOrigin?.balance} <br>
+    Valor original da transferencia: ${transferForm.value.originalValue} <br>
+    Taxa de transferência: ${checkFeeObj.fee} <br>
+    Valor final da transferência: ${checkFeeObj.finalValue} </p>
+  `
+}
+
+async function createTransfer(dto:ITransferDTO){
+  await post(`/transfers/create`, dto);
 }
 
 function buildCreateDto():ITransferDTO{
@@ -134,7 +182,7 @@ function buildCreateDto():ITransferDTO{
     originAccountNumber: transferForm.value.accountOrigin?.accountNumber as string,
     destinationAccountNumber: transferForm.value.accountDestination?.accountNumber as string,
     scheduledDate: transferForm.value.scheduledDate
-  }
+  };
 }
 
 async function deleteTransfer(id:string){
@@ -143,12 +191,57 @@ async function deleteTransfer(id:string){
   })
 }
 
-function validateTransfer(){
-  // if(true) {
+function validateTransfer(dto:ITransferDTO, checkedFeeData:ICheckFeeDTO):boolean{
+  if(!dto.originalValue || !dto.originAccountNumber || !dto.destinationAccountNumber || !dto.scheduledDate) {
+    console.error("Dados faltando")
+    return false;
+  } else if (!validateDate(dto.scheduledDate)){
+    console.error("Data de agendamento inválida")
+    return false;
+  } else if (!validateFee(checkedFeeData)){
+    console.error("Falha na validação de taxa")
+    return false;
+  }
+  return true;
+}
 
-  //   return false;
-  // }
-  // return true;
+function validateFee(checkedFeeData:ICheckFeeDTO):boolean{
+  if(!transferForm.value.accountOrigin?.balance || transferForm.value.accountOrigin?.balance < checkedFeeData.finalValue){
+    ElNotification({
+      message:"O saldo da conta de origem é insuficiente",
+      type:"error",
+      duration:3000
+    })
+    return false;
+  }
+  return true;
+}
+
+function validateDate(stringDate:string):boolean{
+  const date = new Date(stringDate);
+  const today = Date.now();
+  const todayDate = new Date(today);
+
+  todayDate.setHours(0);
+  todayDate.setMinutes(0);
+  todayDate.setSeconds(0);
+  todayDate.setMilliseconds(0);
+
+  date.setHours(0);
+  date.setMinutes(0);
+  date.setSeconds(0);
+  date.setMilliseconds(0);
+
+  if (date.getTime() < todayDate.getTime()){
+    ElNotification({
+      message:"Data inválida",
+      type:"error",
+      duration:3000
+    })
+    return false
+  };
+
+  return true;
 }
 
 
