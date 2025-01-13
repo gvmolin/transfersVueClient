@@ -65,3 +65,28 @@ Essas tecnologias foram escolhidas para garantir uma aplicação eficiente, esca
    yarn install
    yarn dev
    ```
+
+------------------------------------------
+## Progresso geral
+
+### Feito
+- Estrutura inicial (vue3 + router + axios + pinia + elementplus + fontsawesome, etc)
+- Tela de listagem de usuários
+- Formulário de criação e atualização de usuários
+- Validação inicial de usuários
+- Tela de listagem de transferências
+- Formulário de criação de transferências
+- Validação inicial de transferências
+- Validação assíncrona do 'valor de transferencia' x 'saldo em conta'
+- Notificações de erro e sucesso 
+
+### A fazer
+- Sistema de paginação (tabelas)
+- Sistema de filtragem (tabelas)
+- Sistema de ordenação (tabelas)
+- Melhorias nas validações dos formulários:
+- - Implementação de novas regras
+- - Mostragem de retornos de erro de validação
+- Tela de login
+- Sistema de autenticação
+- Melhorias de layout
