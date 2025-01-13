@@ -21,10 +21,10 @@ export const useAxios = () => {
         type:'success'
       });
       return response.data;
-    } catch (error) {
+    } catch (error:any) {
       console.error('Error fetching data:', error);
       ElNotification({
-        message: "Erro ao buscar dados", 
+        message: error.message || "Erro ao buscar dados", 
         duration: notifDuration, 
         type:'error'
       });
@@ -41,10 +41,10 @@ export const useAxios = () => {
         type:'success'
       });
       return response.data;
-    } catch (error) {
+    } catch (error:any) {
       console.error('Error posting data:', error);
       ElNotification({
-        message: "Erro ao enviar dados", 
+        message: error.message || "Erro ao enviar dados", 
         duration: notifDuration, 
         type:'error'
       });
@@ -61,11 +61,11 @@ export const useAxios = () => {
         type:'success'
       });
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error updating data:', error);
       console.error('Error posting data:', error);
       ElNotification({
-        message: "Erro ao atualizar dados", 
+        message: error.message || "Erro ao atualizar dados", 
         duration: notifDuration, 
         type:'error'
       });
@@ -82,11 +82,11 @@ export const useAxios = () => {
         type:'success'
       });
       return response.data;
-    } catch (error) {
+    } catch (error:any) {
       console.error('Error deleting data:', error)
       ElNotification({
         message: "Erro ao deletar dados", 
-        duration: notifDuration, 
+        duration: error.message || notifDuration, 
         type:'error'
       });
       throw error;
