@@ -57,18 +57,12 @@ onMounted(async()=>{
   await getUsers();
 });
 
-watch(()=> accountOrigin.value, ()=>{
-  console.log(accountOrigin.value)
-})
-
-watch(()=> props.form, ()=>{
-  console.log(props.form)
-})
-
 function onSubmit(){
   props.form.accountDestination = userList.value?.find(el => el.id === accountDestination.value);
   props.form.accountOrigin = userList.value?.find(el => el.id === accountOrigin.value);
-  console.log(props.form);
+  
+
+
   emit("submit");
 }
 
