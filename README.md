@@ -86,7 +86,7 @@ Essas tecnologias foram escolhidas para garantir uma aplicação eficiente, esca
 - Sistema de ordenação (tabelas)
 - Melhorias nas validações dos formulários:
 - - Implementação de novas regras
-- - Mostragem de retornos de erro de validação
+- - Mostragem dos retornos de validação
 - Tela de login
 - Sistema de autenticação
 - Melhorias de layout
