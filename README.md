@@ -66,11 +66,10 @@ Essas tecnologias foram escolhidas para garantir uma aplicação eficiente, esca
    yarn dev
    ```
 
-------------------------------------------
 ## Progresso geral
 
 ### Feito
-- Estrutura inicial (vue3 + router + axios + pinia + elementplus + fontsawesome, etc)
+- Estrutura inicial (Vue3 + Vue Router + Axios + Pinia + Elementplus + Fontsawesome)
 - Tela de listagem de usuários
 - Formulário de criação e atualização de usuários
 - Validação inicial de usuários
